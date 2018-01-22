@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.shukriev.camel-exception-handling</groupId>
+    <artifactId>Camel-ExceptionHandling</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+
+    <properties>
+        <camel.version>2.15.1.redhat-621084</camel.version>
+        <!--<camel.version>2.15.1.redhat-621084</camel.version>-->
+        <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jboss.fuse.bom.version>6.3.0.redhat-187</jboss.fuse.bom.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--Dependency Managment-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.fuse.bom</groupId>
+                <artifactId>jboss-fuse-parent</artifactId>
+                <version>${jboss.fuse.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--Dependencies-->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <!--<version>2.17.0.redhat-630187</version>-->
+            <version>2.15.1.redhat-621084</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>2.17.0.redhat-630187</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>2.17.0.redhat-630187</version>
+        </dependency>
+    </dependencies>
+
+    <!--Fuse, RedHat Repositories-->
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>fuse-public-repository</id>
+            <name>FuseSource Community Release Repository</name>
+            <url>https://repo.fusesource.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>red-hat-ga-repository</id>
+            <name>Red Hat GA Repository</name>
+            <url>https://maven.repository.redhat.com/ga</url>
+        </repository>
+        <repository>
+            <id>redhat-early-access-repository</id>
+            <url>https://maven.repository.redhat.com/earlyaccess/all</url>
+        </repository>
+    </repositories>
+
+    <!-- Fuse, RedHad Plugin Repositories-->
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>fuse-public-repository</id>
+            <name>FuseSource Community Release Repository</name>
+            <url>https://repo.fusesource.com/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>red-hat-ga-repository</id>
+            <name>Red Hat GA Repository</name>
+            <url>https://maven.repository.redhat.com/ga</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>redhat-early-access-repository</id>
+            <url>https://maven.repository.redhat.com/earlyaccess/all</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- Build Configuration -->
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${version.maven-bundle-plugin}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>Shukriev</Bundle-SymbolicName>
+                        <Bundle-Name>Shukriev Camel Exception Handling example</Bundle-Name>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-maven-plugin</artifactId>
+                <version>2.17.0.redhat-630187</version>
+                <configuration>
+                    <fileApplicationContextUri>src/main/resources/META-INF/spring/camel-context.xml</fileApplicationContextUri>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

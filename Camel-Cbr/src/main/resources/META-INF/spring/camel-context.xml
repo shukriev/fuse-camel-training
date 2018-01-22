@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring
+		http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://fabric8.com/examples/order/v7 ">
+
+    <bean id="contentBasedRoute" class="com.shukriev.routes.ContentBasedRoute"/>
+    <bean id="routeBean" class="com.shukriev.bean.RouteBean"/>
+
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring" xmlns:order="http://fabric8.com/examples/v7"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://fabric8.com/examples/v7 ">
+        <routeBuilder ref="contentBasedRoute"/>
+    </camelContext>
+</beans>

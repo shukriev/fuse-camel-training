@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring
+		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!--Routes -->
+    <bean id="splitterRouteBuilder" class="com.shukriev.routes.SplitterRouteBuilder" />
+    <bean id="recipientRouteBuilder" class="com.shukriev.routes.RecipientRouteBuilder" />
+    <bean id="mainRouteBuilder" class="com.shukriev.routes.MainRouteBuilder" />
+    <bean id="wiretapRouteBuilder" class="com.shukriev.routes.WiretapRouteBuilder" />
+    <bean id="filterRouteBuilder" class="com.shukriev.routes.FilterRouteBuilder" />
+
+
+
+    <!--Bean-->
+    <bean id="regionSupport" class="com.shukriev.bean.RegionSupport" />
+    <bean id="orderIdSupport" class="com.shukriev.bean.OrderIdSupport" />
+    <bean id="debugSupport" class="com.shukriev.bean.DebugSupport" />
+    <bean id="recipientsSupport" class="com.shukriev.bean.RecipientsSupport" />
+    <bean id="filterSupport" class="com.shukriev.bean.FilterSupport" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <routeBuilder ref="mainRouteBuilder" />
+        <routeBuilder ref="splitterRouteBuilder" />
+        <routeBuilder ref="recipientRouteBuilder" />
+        <routeBuilder ref="wiretapRouteBuilder" />
+        <routeBuilder ref="filterRouteBuilder" />
+    </camelContext>
+</beans>

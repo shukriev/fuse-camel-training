@@ -4,11 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://camel.apache.org/schema/spring
-		http://camel.apache.org/schema/spring/camel-spring.xsd
-		http://fabric8.com/examples/v7">
+		http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <!--Routes-->
     <bean id="mainRouteBuilder" class="com.shukriev.routes.MainRouteBuilder" />
+    <bean id="usRouteBuilder" class="com.shukriev.routes.UsRouteBuilder" />
+    <bean id="ukRouteBuilder" class="com.shukriev.routes.UkRouteBuilder" />
+    <bean id="otherCountriesRouteBuilder" class="com.shukriev.routes.OtherCountriesRouteBuilder" />
 
     <bean id="activemq"
           class="org.apache.activemq.camel.component.ActiveMQComponent">
@@ -19,5 +21,8 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <routeBuilder ref="mainRouteBuilder" />
+        <routeBuilder ref="usRouteBuilder" />
+        <routeBuilder ref="ukRouteBuilder" />
+        <routeBuilder ref="otherCountriesRouteBuilder" />
     </camelContext>
 </beans>
